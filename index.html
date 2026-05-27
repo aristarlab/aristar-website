@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AristarLab — Intelligent Software, Crafted in Seoul</title>
+<meta name="description" content="AristarLab is a Seoul-based software studio building intelligent mobile and automation products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #c8442a;
+    --line: #d8d3c4;
+    --grid: #e8e3d4;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Fraunces',Georgia,serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    min-height:100vh;
+    overflow-x:hidden;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:80px 80px;
+    background-position:-1px -1px;
+  }
+  .container{max-width:1200px;margin:0 auto;padding:0 32px}
+
+  /* Header */
+  header{
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+    background:var(--bg);
+  }
+  .nav{display:flex;justify-content:space-between;align-items:center}
+  .logo{
+    font-size:20px;
+    font-weight:500;
+    letter-spacing:-0.02em;
+    font-style:italic;
+  }
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:32px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .nav-links a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+
+  /* Hero */
+  .hero{
+    padding:140px 0 120px;
+    position:relative;
+  }
+  .hero-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--accent);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:32px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .hero-tag::before{
+    content:'';
+    width:32px;
+    height:1px;
+    background:var(--accent);
+  }
+  .hero h1{
+    font-size:clamp(48px,8vw,108px);
+    font-weight:300;
+    line-height:0.95;
+    letter-spacing:-0.04em;
+    margin-bottom:40px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--accent);
+  }
+  .hero-desc{
+    font-size:20px;
+    color:var(--muted);
+    max-width:580px;
+    line-height:1.5;
+    font-weight:300;
+  }
+
+  /* Section */
+  section{padding:100px 0;border-top:1px solid var(--line)}
+  .section-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .section-title{
+    font-size:clamp(32px,4vw,52px);
+    font-weight:300;
+    letter-spacing:-0.03em;
+    line-height:1.1;
+    margin-bottom:60px;
+    max-width:800px;
+  }
+  .section-title em{font-style:italic;color:var(--accent)}
+
+  /* About */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .about-text p{
+    font-size:18px;
+    color:var(--ink);
+    margin-bottom:24px;
+    line-height:1.7;
+  }
+  .about-meta{
+    border-left:1px solid var(--line);
+    padding-left:40px;
+  }
+  .meta-row{
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+  }
+  .meta-row:last-child{border-bottom:none}
+  .meta-row .key{color:var(--muted)}
+  .meta-row .val{color:var(--ink);text-align:right}
+
+  /* Products */
+  .products{display:grid;gap:2px;background:var(--line)}
+  .product{
+    background:var(--bg);
+    padding:48px;
+    display:grid;
+    grid-template-columns:120px 1fr 200px;
+    gap:40px;
+    align-items:center;
+    transition:background .3s;
+  }
+  .product:hover{background:#f9f7f1}
+  .product-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--accent);
+  }
+  .product-name{
+    font-size:24px;
+    font-weight:400;
+    letter-spacing:-0.02em;
+  }
+  .product-name em{font-style:italic;color:var(--accent)}
+  .product-desc{
+    font-size:14px;
+    color:var(--muted);
+    margin-top:8px;
+  }
+  .product-status{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-align:right;
+    color:var(--muted);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .status-dot{
+    display:inline-block;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#888;
+    margin-right:8px;
+    vertical-align:middle;
+  }
+  .status-dot.active{background:#22a05c;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{
+    0%,100%{opacity:1}
+    50%{opacity:0.4}
+  }
+
+  /* Contact */
+  .contact-block{
+    background:var(--ink);
+    color:var(--bg);
+    padding:80px;
+    border-radius:2px;
+    margin-top:40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-block::before{
+    content:'';
+    position:absolute;
+    top:-50%;
+    right:-10%;
+    width:500px;
+    height:500px;
+    background:radial-gradient(circle, rgba(200,68,42,0.15) 0%, transparent 70%);
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    position:relative;
+  }
+  .contact-title{
+    font-size:40px;
+    font-weight:300;
+    letter-spacing:-0.02em;
+    line-height:1.2;
+    margin-bottom:24px;
+  }
+  .contact-title em{font-style:italic;color:var(--accent)}
+  .contact-info{font-family:'JetBrains Mono',monospace;font-size:13px}
+  .contact-row{
+    padding:16px 0;
+    border-bottom:1px solid rgba(245,243,238,0.15);
+  }
+  .contact-row:last-child{border-bottom:none}
+  .contact-row .label{
+    color:#999;
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .contact-row .value{color:var(--bg);font-size:15px}
+  .contact-row a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(245,243,238,0.3);transition:border .2s}
+  .contact-row a:hover{border-color:var(--accent)}
+
+  /* Footer */
+  footer{
+    padding:40px 0;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{color:var(--muted);text-decoration:none}
+  .footer-links a:hover{color:var(--ink)}
+
+  @media (max-width:768px){
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+    .product{grid-template-columns:1fr;gap:16px;padding:32px}
+    .product-status{text-align:left}
+    .contact-block{padding:48px 32px}
+    .nav-links{gap:16px;font-size:11px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">Aristar<span>Lab</span></div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-tag">Software Studio · Est. 2026</div>
+      <h1>Quiet software for <em>loud lives</em>.</h1>
+      <p class="hero-desc">
+        AristarLab is a Seoul-based studio designing intelligent mobile applications
+        and automation systems. We build tools that learn with you,
+        not against you.
+      </p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-label">01 — About</div>
+      <h2 class="section-title">A studio for <em>thoughtful</em> software, built on automation and craft.</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            AristarLab is an independent software studio headquartered in Seoul, Korea.
+            We focus on the intersection of language, learning, and automation —
+            building products that respect the user's attention and time.
+          </p>
+          <p>
+            Our work spans mobile applications, intelligent agents, and
+            content automation systems. Every product we ship is designed
+            to feel deliberate, considered, and quietly useful.
+          </p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-row"><span class="key">Founded</span><span class="val">April 2026</span></div>
+          <div class="meta-row"><span class="key">Location</span><span class="val">Gangnam, Seoul</span></div>
+          <div class="meta-row"><span class="key">Entity</span><span class="val">AristarLab</span></div>
+          <div class="meta-row"><span class="key">Reg. No.</span><span class="val">389-88-03801</span></div>
+          <div class="meta-row"><span class="key">Focus</span><span class="val">Mobile · Automation</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="container">
+      <div class="section-label">02 — Products</div>
+      <h2 class="section-title">In <em>development</em> and on the way.</h2>
+      <div class="products">
+        <div class="product">
+          <div class="product-num">/ 001</div>
+          <div>
+            <div class="product-name">esay <em>memory</em> eng</div>
+            <div class="product-desc">An English vocabulary companion that adapts to your memory curve.</div>
+          </div>
+          <div class="product-status">
+            <span class="status-dot active"></span>Pre-launch
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-num">/ 002</div>
+          <div>
+            <div class="product-name">Content <em>Automation</em></div>
+            <div class="product-desc">Multi-agent pipeline for video content production at scale.</div>
+          </div>
+          <div class="product-status">
+            <span class="status-dot active"></span>Internal
+          </div>
+        </div>
+        <div class="product">
+          <div class="product-num">/ 003</div>
+          <div>
+            <div class="product-name">Algorithmic <em>Trading</em></div>
+            <div class="product-desc">Research-driven systematic strategies on MetaTrader 5.</div>
+          </div>
+          <div class="product-status">
+            <span class="status-dot"></span>R&amp;D
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">03 — Contact</div>
+      <div class="contact-block">
+        <div class="contact-grid">
+          <div>
+            <h2 class="contact-title">Get in <em>touch</em>.<br>We read every message.</h2>
+          </div>
+          <div class="contact-info">
+            <div class="contact-row">
+              <div class="label">Email</div>
+              <div class="value"><a href="mailto:support@aristar.io">support@aristar.io</a></div>
+            </div>
+            <div class="contact-row">
+              <div class="label">Office</div>
+              <div class="value">306 Apgujeong-ro<br>Gangnam-gu, Seoul<br>Republic of Korea</div>
+            </div>
+            <div class="contact-row">
+              <div class="label">Hours</div>
+              <div class="value">Mon — Fri · 10:00 — 19:00 KST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div>© 2026 AristarLab. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:support@aristar.io">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
