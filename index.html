@@ -7,191 +7,199 @@
 <meta name="description" content="AristarLab은 서울의 소프트웨어 스튜디오로, 지능형 모바일 앱과 자동화 시스템을 만듭니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
-    --ink: #191f28;
-    --muted: #4e5968;
-    --accent: #5b3df5;
-    --surface: #f2f4f6;
-    --surface-soft: #f9fafb;
-    --line: #e5e8eb;
-    --icon-muted: #6b7684;
+    --ink: #1d1d1f;
+    --body: #424245;
+    --muted: #6e6e73;
+    --subtle: #86868b;
+    --accent: #0066cc;
+    --surface: #f5f5f7;
+    --line: #d2d2d7;
+    --line-soft: #e5e5ea;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:'Noto Sans KR',system-ui,sans-serif;
+    font-family:'Noto Sans KR',-apple-system,system-ui,sans-serif;
     background:var(--bg);
     color:var(--ink);
-    line-height:1.6;
+    line-height:1.5;
     word-break:keep-all;
     overflow-wrap:break-word;
+    overflow-x:hidden;
   }
   a{color:inherit;text-decoration:none}
-  a:hover{opacity:.8}
+  a:hover{text-decoration:underline}
   a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
-  .container{max-width:1120px;margin:0 auto;padding:0 24px}
-  section[id]{scroll-margin-top:24px}
+  section[id]{scroll-margin-top:16px}
 
   /* Header */
+  header{border-bottom:1px solid var(--line-soft)}
   .nav{
+    max-width:1040px;
+    margin:0 auto;
+    padding:14px 24px;
     display:flex;
     flex-wrap:wrap;
     justify-content:space-between;
     align-items:center;
     gap:12px;
-    padding-top:20px;
-    padding-bottom:20px;
+    font-size:13px;
   }
-  .logo{font-weight:800;font-size:20px;letter-spacing:-0.02em}
-  .nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:24px;font-size:15px;font-weight:500;color:var(--muted)}
-  .nav-cta{color:#fff;background:var(--accent);padding:10px 18px;border-radius:12px}
+  .logo{font-weight:600;font-size:15px}
+  .nav-links{display:flex;flex-wrap:wrap;gap:28px}
 
   /* Hero */
-  .hero{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:56px;
-    padding-top:88px;
-    padding-bottom:112px;
-  }
-  .hero-copy{flex:999 1 520px;min-width:0}
-  .hero-tag{font-size:18px;font-weight:700;color:var(--accent);margin-bottom:20px}
+  .hero{padding:112px 24px 96px;text-align:center}
   .hero h1{
-    font-size:clamp(42px,6.2vw,80px);
-    line-height:1.2;
+    max-width:980px;
+    margin:0 auto;
+    font-size:clamp(36px,7vw,92px);
+    line-height:1.18;
     letter-spacing:-0.04em;
-    font-weight:800;
-  }
-  .hero-desc{margin-top:28px;font-size:clamp(18px,1.7vw,22px);color:var(--muted)}
-  .hero-cards{flex:1 1 340px;display:flex;flex-direction:column;gap:14px}
-  .hero-card{border-radius:28px;background:var(--surface)}
-  .word-card{padding:28px}
-  .word-card .eyebrow{font-size:14px;font-weight:500;color:var(--muted)}
-  .word-card .word{margin-top:10px;font-size:32px;font-weight:800;letter-spacing:-0.02em;line-height:1.3}
-  .word-card .meaning{margin-top:4px;font-size:16px;color:var(--muted)}
-  .answer-card{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:16px;
-    padding:22px 28px;
-    font-size:18px;
     font-weight:700;
+  }
+  .hero-desc{
+    max-width:760px;
+    margin:28px auto 0;
+    font-size:clamp(19px,2vw,25px);
+    line-height:1.35;
+    letter-spacing:-0.01em;
     color:var(--muted);
   }
-  .answer-card.primary{background:var(--accent);color:#fff}
-
-  /* Section */
-  .section{padding-top:112px;padding-bottom:112px}
-  .section-title{
-    font-size:clamp(32px,4vw,52px);
-    line-height:1.3;
-    letter-spacing:-0.03em;
-    font-weight:800;
-    margin-bottom:56px;
+  .hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+  .button{
+    border:1px solid var(--accent);
+    padding:12px 24px;
+    border-radius:999px;
+    font-size:16px;
+    font-weight:500;
+    color:var(--accent);
   }
-
-  /* About */
-  .about{background:var(--surface-soft)}
-  .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
-  .about-card{background:var(--bg);border-radius:24px;padding:32px}
-  .about-card h3{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px}
-  .about-card p{font-size:16px;line-height:1.65;color:var(--muted)}
+  .button:hover{text-decoration:none;opacity:.85}
+  .button.primary{background:var(--accent);color:#fff}
 
   /* Products */
-  .products{display:flex;flex-direction:column;gap:12px}
-  .product{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:24px;
-    background:var(--surface);
-    border-radius:24px;
-    padding:28px 32px;
+  .products{padding:0 12px;display:flex;flex-direction:column;gap:12px}
+  .tile{border-radius:24px;background:var(--surface);text-align:center}
+  .tile-eyebrow{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:10px}
+  .tile-title{letter-spacing:-0.03em;font-weight:700;line-height:1.08}
+
+  .tile-feature{padding:80px 24px 0;overflow:hidden}
+  .tile-feature .tile-eyebrow{font-size:15px;color:var(--accent);margin-bottom:12px}
+  .tile-feature .tile-title{font-size:clamp(40px,5.6vw,72px);line-height:1.05;letter-spacing:-0.035em}
+  .tile-feature .tile-desc{
+    max-width:620px;
+    margin:18px auto 56px;
+    font-size:clamp(19px,2vw,26px);
+    line-height:1.3;
+    letter-spacing:-0.01em;
+    color:var(--body);
   }
-  .product-icon{
-    width:64px;
-    height:64px;
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex:none;
-    background:var(--icon-muted);
+
+  .phone{
+    width:min(100%,340px);
+    height:400px;
+    margin:0 auto;
+    padding:12px 12px 0;
+    background:var(--ink);
+    border-radius:48px 48px 0 0;
   }
-  .product-icon.accent{background:var(--accent)}
-  .product-icon.ink{background:var(--ink)}
-  .product-info{flex:999 1 320px;min-width:0}
-  .product-info h3{font-size:24px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
-  .product-info p{font-size:16px;color:var(--muted)}
-  .product-status{
+  .phone-screen{
+    height:388px;
+    padding:40px 24px 0;
     background:var(--bg);
-    color:var(--muted);
-    padding:8px 14px;
-    border-radius:10px;
-    font-size:14px;
+    border-radius:38px 38px 0 0;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    text-align:left;
+  }
+  .progress{height:6px;border-radius:3px;background:var(--line-soft);overflow:hidden}
+  .progress span{display:block;width:62%;height:100%;background:var(--accent)}
+  .word-card{margin-top:12px;padding:32px 22px;border-radius:24px;background:var(--surface)}
+  .word{font-size:34px;font-weight:700;letter-spacing:-0.03em;line-height:1.2}
+  .meaning{margin-top:12px;font-size:16px;line-height:1.45;color:var(--body)}
+  .answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .answer{padding:16px 6px;border-radius:16px;background:var(--surface);text-align:center;font-size:15px;font-weight:600}
+  .answer.primary{background:var(--accent);color:#fff}
+
+  .tile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+  .tile-half{
+    min-height:480px;
+    padding:64px 28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .tile-half .tile-title{font-size:clamp(32px,3.6vw,48px)}
+  .tile-half .tile-desc{max-width:420px;margin-top:14px;font-size:19px;line-height:1.35;color:var(--body)}
+  .tile-half svg{width:100%;max-width:420px;height:auto;margin-top:auto;padding-top:36px}
+  .tile-dark{background:#000;color:#f5f5f7}
+  .tile-dark .tile-eyebrow{color:#a1a1a6}
+  .tile-dark .tile-desc{color:#c7c7cc}
+
+  /* About */
+  .about{max-width:928px;margin:0 auto;padding:136px 24px 120px}
+  .about h2{
+    font-size:clamp(30px,4vw,52px);
+    line-height:1.14;
+    letter-spacing:-0.03em;
     font-weight:700;
   }
-  .product-status.active{color:var(--accent)}
+  .about h2 span{color:var(--subtle)}
+  .facts{
+    margin-top:72px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:32px;
+  }
+  .facts dt{font-size:13px;color:var(--muted)}
+  .facts dd{margin-top:6px;font-size:19px;font-weight:600}
 
   /* Contact */
-  .contact{padding-bottom:80px}
-  .contact-block{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:40px;
-    background:var(--accent);
-    color:#fff;
-    border-radius:32px;
-    padding:clamp(40px,6vw,72px);
-  }
-  .contact-main{flex:999 1 420px;min-width:0}
-  .contact-title{
-    font-size:clamp(32px,4vw,52px);
-    line-height:1.25;
-    letter-spacing:-0.03em;
-    font-weight:800;
-    margin-bottom:28px;
-  }
-  .contact-button{
-    display:inline-block;
-    background:#fff;
-    color:var(--accent);
-    padding:16px 26px;
-    border-radius:14px;
-    font-size:18px;
+  .contact{padding:0 12px 12px}
+  .contact-block{padding:96px 24px;border-radius:24px;background:var(--surface);text-align:center}
+  .contact-block h2{
+    font-size:clamp(36px,5vw,64px);
+    line-height:1.05;
+    letter-spacing:-0.035em;
     font-weight:700;
   }
-  .contact-button:focus-visible{outline-color:#fff}
-  .contact-info{flex:1 1 280px;font-size:16px;line-height:1.75}
+  .contact-email{
+    display:inline-block;
+    margin-top:24px;
+    color:var(--accent);
+    font-size:clamp(20px,2.2vw,28px);
+    font-weight:500;
+  }
+  .contact-info{margin-top:28px;font-size:15px;line-height:1.6;color:var(--muted)}
 
   /* Footer */
-  footer{border-top:1px solid var(--line)}
-  .footer-row{
+  footer{
+    max-width:1040px;
+    margin:0 auto;
+    padding:24px;
     display:flex;
     flex-wrap:wrap;
     justify-content:space-between;
-    gap:16px;
-    padding-top:32px;
-    padding-bottom:32px;
-    font-size:14px;
+    gap:12px;
+    font-size:13px;
     color:var(--muted);
   }
-  .footer-links{display:flex;flex-wrap:wrap;gap:20px}
-  .footer-links .strong{font-weight:700}
+  .footer-links{display:flex;gap:20px;color:var(--body)}
 
   @media (max-width:768px){
-    .hero{padding-top:48px;padding-bottom:72px;gap:40px}
-    .section{padding-top:72px;padding-bottom:72px}
-    .section-title{margin-bottom:40px}
-    .nav-links{gap:16px}
-    .product{padding:24px}
+    .hero{padding:72px 24px 64px}
+    .tile-feature{padding-top:56px}
+    .tile-half{min-height:0;padding:48px 24px}
+    .about{padding:88px 24px 80px}
+    .contact-block{padding:64px 24px}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -201,110 +209,99 @@
 <body>
 
 <header>
-  <div class="container nav">
+  <div class="nav">
     <a href="#top" class="logo">AristarLab</a>
     <nav class="nav-links">
-      <a href="#about">회사 소개</a>
       <a href="#products">제품</a>
-      <a href="#contact" class="nav-cta">문의하기</a>
+      <a href="#about">회사 소개</a>
+      <a href="#contact">문의하기</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <section id="top" class="container hero">
-    <div class="hero-copy">
-      <p class="hero-tag">서울의 소프트웨어 스튜디오</p>
-      <h1>시끄러운 일상을 위한 조용한 소프트웨어</h1>
-      <p class="hero-desc">당신과 맞서지 않고, 당신과 함께 배우는 도구를 만듭니다.</p>
+  <section id="top" class="hero">
+    <h1>시끄러운 일상을 위한<br>조용한 소프트웨어</h1>
+    <p class="hero-desc">서울에서 지능형 모바일 앱과 자동화 제품을 만듭니다.</p>
+    <div class="hero-actions">
+      <a href="#products" class="button primary">제품 보기</a>
+      <a href="#contact" class="button">문의하기</a>
     </div>
-    <div class="hero-cards" aria-hidden="true">
-      <div class="hero-card word-card">
-        <p class="eyebrow">오늘 복습할 단어</p>
-        <p class="word">ephemeral</p>
-        <p class="meaning">아주 잠깐 머무는, 덧없는</p>
+  </section>
+
+  <section id="products" class="products">
+    <article class="tile tile-feature">
+      <p class="tile-eyebrow">출시 준비 중</p>
+      <h2 class="tile-title">esay memory eng</h2>
+      <p class="tile-desc">내 기억 곡선에 맞춰 주는 영어 단어 앱</p>
+      <div class="phone" role="img" aria-label="휴대폰 화면에 표시된 영어 단어 복습 카드 예시">
+        <div class="phone-screen" aria-hidden="true">
+          <div class="progress"><span></span></div>
+          <div class="word-card">
+            <p class="word">ephemeral</p>
+            <p class="meaning">아주 잠깐 머무는, 덧없는</p>
+          </div>
+          <div class="answers">
+            <div class="answer">다시 볼게요</div>
+            <div class="answer primary">기억났어요</div>
+          </div>
+        </div>
       </div>
-      <div class="hero-card answer-card primary">
-        기억났어요
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>
-      </div>
-      <div class="hero-card answer-card">다시 볼게요</div>
+    </article>
+
+    <div class="tile-grid">
+      <article class="tile tile-half tile-dark">
+        <p class="tile-eyebrow">사내 운영</p>
+        <h2 class="tile-title">콘텐츠 자동화</h2>
+        <p class="tile-desc">영상 콘텐츠를 대규모로 제작하는 멀티 에이전트 파이프라인</p>
+        <svg viewBox="0 0 420 140" aria-hidden="true">
+          <line x1="80" y1="70" x2="130" y2="70" stroke="#636366" stroke-width="2"/>
+          <line x1="190" y1="70" x2="240" y2="70" stroke="#636366" stroke-width="2"/>
+          <line x1="300" y1="70" x2="345" y2="70" stroke="#636366" stroke-width="2"/>
+          <circle cx="50" cy="70" r="30" fill="#2c2c2e"/>
+          <circle cx="160" cy="70" r="30" fill="#48484a"/>
+          <circle cx="270" cy="70" r="30" fill="#8e8e93"/>
+          <circle cx="375" cy="70" r="30" fill="#f5f5f7"/>
+          <path d="M366 56 L388 70 L366 84 Z" fill="#000"/>
+        </svg>
+      </article>
+      <article class="tile tile-half">
+        <p class="tile-eyebrow">연구 개발</p>
+        <h2 class="tile-title">알고리즘 트레이딩</h2>
+        <p class="tile-desc">MetaTrader 5 기반의 리서치 중심 시스템 전략</p>
+        <svg viewBox="0 0 420 140" aria-hidden="true">
+          <path d="M6 70 C 56 10, 86 10, 136 70 S 216 130, 266 70 S 366 10, 414 70" fill="none" stroke="#1d1d1f" stroke-width="3"/>
+          <path d="M6 70 C 56 40, 86 40, 136 70 S 216 100, 266 70 S 366 40, 414 70" fill="none" stroke="#aeaeb2" stroke-width="3"/>
+        </svg>
+      </article>
     </div>
   </section>
 
   <section id="about" class="about">
-    <div class="container section">
-      <h2 class="section-title">쓸수록 조용히 쓸모 있도록<br>한 번 더 고민합니다</h2>
-      <div class="about-grid">
-        <article class="about-card">
-          <h3>주의와 시간을 존중해요</h3>
-          <p>사용자의 시간을 빼앗지 않는 제품을 만듭니다.</p>
-        </article>
-        <article class="about-card">
-          <h3>언어, 학습, 자동화</h3>
-          <p>세 분야가 만나는 지점에서 모바일 앱과 지능형 에이전트를 만듭니다.</p>
-        </article>
-        <article class="about-card">
-          <h3>신중하게 내놓아요</h3>
-          <p>모든 제품이 깊이 고민한 결과로 느껴지도록 설계합니다.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="products">
-    <div class="container section">
-      <h2 class="section-title">지금 만들고 있어요</h2>
-      <div class="products">
-        <article class="product">
-          <span class="product-icon accent" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/></svg></span>
-          <div class="product-info">
-            <h3>esay memory eng</h3>
-            <p>내 기억 곡선에 맞춰 주는 영어 단어 앱</p>
-          </div>
-          <span class="product-status active">출시 준비 중</span>
-        </article>
-        <article class="product">
-          <span class="product-icon ink" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span>
-          <div class="product-info">
-            <h3>콘텐츠 자동화</h3>
-            <p>영상 콘텐츠를 대규모로 제작하는 멀티 에이전트 파이프라인</p>
-          </div>
-          <span class="product-status">사내 운영</span>
-        </article>
-        <article class="product">
-          <span class="product-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 4 8-9"/></svg></span>
-          <div class="product-info">
-            <h3>알고리즘 트레이딩</h3>
-            <p>MetaTrader 5 기반의 리서치 중심 시스템 전략</p>
-          </div>
-          <span class="product-status">연구 개발</span>
-        </article>
-      </div>
-    </div>
+    <h2>사용자의 주의와 시간을 존중하는 소프트웨어. <span>언어, 학습, 자동화가 만나는 지점에서 일합니다.</span></h2>
+    <dl class="facts">
+      <div><dt>설립</dt><dd>2026년 4월</dd></div>
+      <div><dt>위치</dt><dd>서울 강남구</dd></div>
+      <div><dt>분야</dt><dd>모바일 · 자동화</dd></div>
+      <div><dt>사업자등록번호</dt><dd>389-88-03801</dd></div>
+    </dl>
   </section>
 
   <section id="contact" class="contact">
-    <div class="container">
-      <div class="contact-block">
-        <div class="contact-main">
-          <h2 class="contact-title">보내주신 메시지는<br>모두 읽고 있어요</h2>
-          <a href="mailto:support@aristar.io" class="contact-button">support@aristar.io</a>
-        </div>
-        <p class="contact-info">서울특별시 강남구 압구정로 306<br>평일 10:00 – 19:00</p>
-      </div>
+    <div class="contact-block">
+      <h2>보내주신 메시지는 모두 읽고 있습니다</h2>
+      <a href="mailto:support@aristar.io" class="contact-email">support@aristar.io</a>
+      <p class="contact-info">서울특별시 강남구 압구정로 306<br>평일 10:00 – 19:00</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="container footer-row">
-    <div>© 2026 AristarLab · 사업자등록번호 389-88-03801</div>
-    <div class="footer-links">
-      <a href="/privacy.html" class="strong">개인정보 처리방침</a>
-      <a href="/terms.html">이용약관</a>
-    </div>
-  </div>
+  <span>© 2026 AristarLab. All rights reserved.</span>
+  <span class="footer-links">
+    <a href="/privacy.html">개인정보 처리방침</a>
+    <a href="/terms.html">이용약관</a>
+  </span>
 </footer>
 
 </body>
