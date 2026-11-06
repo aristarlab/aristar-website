@@ -1,0 +1,4 @@
+# 워크트리 생성 시 복사할 gitignore 파일 목록
+CLAUDE.local.md
+.claude/settings.local.json
+.env.local

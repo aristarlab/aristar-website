@@ -1,0 +1,104 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git show:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm test:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(aws sts get-caller-identity)",
+      "Bash(aws amplify list-apps:*)",
+      "Bash(aws amplify get-app:*)",
+      "Bash(aws amplify list-branches:*)",
+      "Bash(aws route53 list-hosted-zones:*)",
+      "Bash(aws route53 list-resource-record-sets:*)",
+      "Bash(aws iam list-roles:*)",
+      "Bash(aws iam get-role:*)",
+      "Bash(aws s3api get-bucket-policy:*)",
+      "Bash(aws s3api get-public-access-block:*)",
+      "Bash(aws ce get-cost-and-usage:*)",
+      "Read(./**)",
+      "Edit(./app/**)",
+      "Edit(./components/**)",
+      "Edit(./lib/**)",
+      "Edit(./content/**)",
+      "Edit(./public/**)",
+      "Edit(./docs/**)",
+      "Edit(./ops/**)",
+      "Write(./docs/**)",
+      "Write(./ops/**)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(aws amplify create-*)",
+      "Bash(aws amplify update-*)",
+      "Bash(aws route53 change-resource-record-sets:*)",
+      "Edit(./CLAUDE.md)",
+      "Edit(./.claude/settings.json)",
+      "Edit(./index.html)",
+      "Edit(./privacy.html)",
+      "Edit(./terms.html)",
+      "Edit(./CNAME)",
+      "Edit(./app-ads.txt)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard origin/main:*)",
+      "Bash(aws amplify delete-app:*)",
+      "Bash(aws amplify delete-branch:*)",
+      "Bash(aws route53 delete-hosted-zone:*)",
+      "Bash(aws s3 rb:*)",
+      "Bash(aws s3 rm --recursive:*)",
+      "Bash(aws iam delete-*)",
+      "Bash(terraform destroy:*)",
+      "Bash(cdk destroy:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*credentials*)",
+      "Read(./**/*.pem)",
+      "Read(./**/service-account*.json)",
+      "Read(~/.aws/credentials)",
+      "Read(./ops/voc/inbox/**)",
+      "Write(./ops/voc/inbox/**)",
+      "Write(./.env)",
+      "Write(./.env.*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/guard_dns.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/check_secrets.py"
+          }
+        ]
+      }
+    ]
+  }
+}

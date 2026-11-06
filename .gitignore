@@ -1,0 +1,38 @@
+# 개인 지침·설정 (팀 공유 금지)
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/agent-memory/
+
+# 환경변수·자격증명
+.env
+.env.*
+!.env.example
+*.pem
+*credentials*
+service-account*.json
+
+# 고객 메일 원본 (절대 커밋 금지 — 디렉터리 자리만 유지)
+ops/voc/inbox/*
+!ops/voc/inbox/.gitkeep
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+
+# AWS / IaC
+.amplify/
+cdk.out/
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
