@@ -1,0 +1,180 @@
+<title>AristarLab 시각 방향 비교</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* 하네스는 액센트 색을 쓰지 않는다 — 색이 있으면 두 안 중 한쪽이 유리해 보인다 */
+  :root{
+    --bg:#E8EBEA; --surface:#FFFFFF; --sunk:#DADFDD;
+    --ink:#1A2420; --mid:#5A6762; --line:#C9D0CD;
+    --ui:'Gothic A1',-apple-system,system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#161A19; --surface:#1F2523; --sunk:#111514;
+      --ink:#E6EBE9; --mid:#9AA5A1; --line:#333B38;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#161A19; --surface:#1F2523; --sunk:#111514;
+    --ink:#E6EBE9; --mid:#9AA5A1; --line:#333B38;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--ui); font-size:15px; line-height:1.6; word-break:keep-all;
+  }
+  code{font-family:var(--mono);font-size:.92em}
+  .page{max-width:1480px;margin:0 auto;padding:32px 24px 72px;display:flex;flex-direction:column;gap:24px}
+
+  header h1{margin:0;font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-0.01em;text-wrap:balance}
+  header p{margin:10px 0 0;max-width:64ch;color:var(--mid)}
+
+  .controls{display:flex;flex-wrap:wrap;gap:18px 36px;align-items:flex-end;
+            padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+  .group{display:flex;flex-direction:column;gap:7px}
+  .group>span{font-size:12px;color:var(--mid);letter-spacing:.06em;font-weight:500}
+  .seg{display:flex;gap:6px}
+  .seg button{font-family:var(--mono);font-size:13px;padding:7px 13px;cursor:pointer;
+    background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:6px}
+  .seg button:hover{background:var(--sunk)}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+  .seg button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  .panes{display:grid;gap:20px;grid-template-columns:1fr}
+  @media (min-width:1100px){.panes.split{grid-template-columns:1fr 1fr}}
+  .pane{display:flex;flex-direction:column;min-width:0;background:var(--surface);
+        border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .pane-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;
+             padding:14px 16px;border-bottom:1px solid var(--line)}
+  .pane-head b{font-size:15px;font-weight:700}
+  .pane-head span{font-size:13px;color:var(--mid)}
+  .pane-head a{margin-left:auto;font-size:13px;color:var(--ink);
+               text-decoration:underline;text-underline-offset:3px;padding:2px}
+  .stage{background:var(--sunk);padding:16px;display:flex;justify-content:center;overflow-x:auto}
+  .stage iframe{width:var(--w,100%);max-width:100%;height:760px;flex:0 0 auto;
+                border:1px solid var(--line);background:#fff;display:block}
+
+  .diff{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .diff h2{margin:0;padding:16px 18px 0;font-size:17px;font-weight:700}
+  .diff .note{margin:6px 18px 14px;color:var(--mid);font-size:14px}
+  .scroll{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+  th,td{text-align:left;padding:11px 18px;border-top:1px solid var(--line);vertical-align:top}
+  thead th{border-top:0;font-size:12px;letter-spacing:.06em;color:var(--mid);font-weight:500}
+  tbody th{font-weight:500;white-space:nowrap}
+  .shared{margin:0;padding:14px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--mid)}
+  .shared b{color:var(--ink);font-weight:500}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="page">
+  <header>
+    <h1>시각 방향 두 안 비교</h1>
+    <p>같은 내용, 같은 구조적 수정을 두 시각 언어로 구현했습니다. 화면 폭을 <code>360</code>으로 바꿔 보십시오 — 명세에서 실측 과제로 남겨 둔 구간입니다.</p>
+  </header>
+
+  <div class="controls">
+    <div class="group">
+      <span>보기</span>
+      <div class="seg" id="view">
+        <button type="button" data-v="split" aria-pressed="true">나란히</button>
+        <button type="button" data-v="a" aria-pressed="false">A만</button>
+        <button type="button" data-v="b" aria-pressed="false">B만</button>
+      </div>
+    </div>
+    <div class="group">
+      <span>화면 폭</span>
+      <div class="seg" id="width">
+        <button type="button" data-w="100%" aria-pressed="true">전체</button>
+        <button type="button" data-w="768px" aria-pressed="false">768</button>
+        <button type="button" data-w="360px" aria-pressed="false">360</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panes split" id="panes">
+    <section class="pane" id="pane-a">
+      <div class="pane-head">
+        <b>A — 쇼케이스</b>
+        <span>승인 명세 적용 · Noto Sans KR · <code>#0066cc</code></span>
+        <a href="a-showcase.html" target="_blank" rel="noopener">단독으로 열기</a>
+      </div>
+      <div class="stage">
+        <iframe src="a-showcase.html" title="프로토타입 A — 쇼케이스 방향"></iframe>
+      </div>
+    </section>
+
+    <section class="pane" id="pane-b">
+      <div class="pane-head">
+        <b>B — 색인</b>
+        <span>새 제안 · 고운바탕 + IBM Plex Sans KR · 잉크 스케일</span>
+        <a href="b-index.html" target="_blank" rel="noopener">단독으로 열기</a>
+      </div>
+      <div class="stage">
+        <iframe src="b-index.html" title="프로토타입 B — 색인 방향"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <div class="diff">
+    <h2>갈리는 지점 5건</h2>
+    <p class="note">아래만 다릅니다. 그 밖의 것은 두 안이 같습니다.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">항목</th><th scope="col">A — 쇼케이스</th><th scope="col">B — 색인</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">팔레트</th>
+              <td>Apple 계열 회색 + <code>#0066cc</code></td>
+              <td>잉크 단색 스케일 + 청록 신호 <code>#2E6354</code></td></tr>
+          <tr><th scope="row">서체</th>
+              <td>Noto Sans KR — 한글 웹의 기본값</td>
+              <td>고운바탕(조용함) + IBM Plex Sans KR(소프트웨어)</td></tr>
+          <tr><th scope="row">제목 크기</th>
+              <td>최대 92px. 조용함을 주장하는 문장을 크게 외친다</td>
+              <td>최대 44px. 여백이 무게를 든다</td></tr>
+          <tr><th scope="row">구조</th>
+              <td>쇼케이스 타일 3개(라운드 24px), 가운데 정렬</td>
+              <td>동일 구조의 색인 행, 상태는 좌측 열, 왼쪽 정렬</td></tr>
+          <tr><th scope="row">자간</th>
+              <td><code>clamp()</code> px 보간으로 과한 자간 보정</td>
+              <td><code>0</code>. 스케일을 줄여 보정 자체가 불필요</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="shared"><b>두 안 공통:</b> 다크 타일 폐기 · 3개 사업 동일 중립 배지 · 제품에서 <code>/&lt;슬러그&gt;</code> 링크 · 파이프라인을 실제 <code>&lt;ol&gt;</code>로 노출(접근성 평탄화 회피) · 360px 구간 대응 · 하드코딩 색 제거 · <code>keep-all</code> 유지 · 비트리거 모션 없음</p>
+  </div>
+</div>
+
+<script>
+  var panes = document.getElementById('panes');
+  var paneA = document.getElementById('pane-a');
+  var paneB = document.getElementById('pane-b');
+
+  function press(seg, el){
+    var list = seg.querySelectorAll('button');
+    for (var i = 0; i < list.length; i++){
+      list[i].setAttribute('aria-pressed', String(list[i] === el));
+    }
+  }
+
+  document.getElementById('view').addEventListener('click', function(e){
+    var btn = e.target.closest('button'); if(!btn) return;
+    var v = btn.dataset.v;
+    paneA.hidden = (v === 'b');
+    paneB.hidden = (v === 'a');
+    panes.classList.toggle('split', v === 'split');
+    press(this, btn);
+  });
+
+  document.getElementById('width').addEventListener('click', function(e){
+    var btn = e.target.closest('button'); if(!btn) return;
+    var frames = document.querySelectorAll('.stage iframe');
+    for (var i = 0; i < frames.length; i++){
+      frames[i].style.setProperty('--w', btn.dataset.w);
+    }
+    press(this, btn);
+  });
+</script>

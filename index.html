@@ -5,280 +5,209 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AristarLab — 시끄러운 일상을 위한 조용한 소프트웨어</title>
 <meta name="description" content="AristarLab은 서울의 소프트웨어 스튜디오로, 지능형 모바일 앱과 자동화 시스템을 만듭니다.">
+<link rel="canonical" href="https://aristar.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aristar.io/">
+<meta property="og:title" content="AristarLab — 시끄러운 일상을 위한 조용한 소프트웨어">
+<meta property="og:description" content="서울에서 모바일 앱과 자동화 제품을 만듭니다. 언어, 학습, 자동화가 만나는 지점에서 일합니다.">
+<meta property="og:locale" content="ko_KR">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #ffffff;
-    --ink: #1d1d1f;
-    --body: #424245;
-    --muted: #6e6e73;
-    --subtle: #86868b;
-    --accent: #0066cc;
-    --surface: #f5f5f7;
-    --line: #d2d2d7;
-    --line-soft: #e5e5ea;
+  :root{
+    /* 잉크 단색 스케일 — 텍스트에 쓸 색이 하나뿐이라 액센트가 장식으로 번질 수 없다 */
+    --ink:#0F1C24;        /* 17.33:1 on white */
+    --ink-mid:#45575F;    /*  7.55:1 on white */
+    --hairline:#94A3AB;   /*  2.60:1 — 선 전용, 텍스트 금지 */
+    --paper:#F4F6F6;
+    --page:#FFFFFF;
+    --signal:#2E6354;     /*  6.93:1 on white — 링크·포커스·상태 */
+    --measure:540px;      /* 전단짜기 활자틀 25~35배 환산 범위 내 */
+    --serif:'Gowun Batang','Apple SD Gothic Neo',serif;
+    --sans:'IBM Plex Sans KR',-apple-system,system-ui,sans-serif;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:'Noto Sans KR',-apple-system,system-ui,sans-serif;
-    background:var(--bg);
+    font-family:var(--sans);
+    font-size:17px;
+    font-weight:400;
+    line-height:1.6;
+    letter-spacing:0;
+    background:var(--page);
     color:var(--ink);
-    line-height:1.5;
     word-break:keep-all;
     overflow-wrap:break-word;
     overflow-x:hidden;
   }
   a{color:inherit;text-decoration:none}
-  a:hover{text-decoration:underline}
-  a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
-  section[id]{scroll-margin-top:16px}
+  /* 라운드는 상호작용 표면에만 쓴다 — "누를 수 있음"을 뜻하게 한다 */
+  a:focus-visible{outline:2px solid var(--signal);outline-offset:4px;border-radius:3px}
+  section[id]{scroll-margin-top:24px}
 
-  /* Header */
-  header{border-bottom:1px solid var(--line-soft)}
-  .nav{
-    max-width:1040px;
-    margin:0 auto;
-    padding:14px 24px;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    font-size:13px;
-  }
-  .logo{font-weight:600;font-size:15px}
-  .nav-links{display:flex;flex-wrap:wrap;gap:28px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 32px}
 
-  /* Hero */
-  .hero{padding:112px 24px 96px;text-align:center}
-  .hero h1{
-    max-width:980px;
-    margin:0 auto;
-    font-size:clamp(36px,7vw,92px);
-    line-height:1.18;
-    letter-spacing:-0.04em;
-    font-weight:700;
-  }
-  .hero-desc{
-    max-width:760px;
-    margin:28px auto 0;
-    font-size:clamp(19px,2vw,25px);
-    line-height:1.35;
+  /* ── 마스트헤드 ── */
+  .masthead{padding:28px 0 0;display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+  .masthead .name{font-family:var(--serif);font-size:19px;font-weight:700}
+  .masthead nav{display:flex;gap:24px;font-size:14px;color:var(--ink-mid)}
+  .masthead nav a:hover{color:var(--signal)}
+
+  /* ── 성명문: 여백이 무게를 든다 ── */
+  .statement{padding:140px 0 120px}
+  .statement h1{
+    font-family:var(--serif);
+    font-size:clamp(30px,4.2vw,44px);
+    font-weight:400;
+    line-height:1.45;
     letter-spacing:-0.01em;
-    color:var(--muted);
+    max-width:16em;
   }
-  .hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-  .button{
-    border:1px solid var(--accent);
-    padding:12px 24px;
-    border-radius:999px;
-    font-size:16px;
-    font-weight:500;
-    color:var(--accent);
-  }
-  .button:hover{text-decoration:none;opacity:.85}
-  .button.primary{background:var(--accent);color:#fff}
+  .statement .lede{margin-top:28px;max-width:var(--measure);color:var(--ink-mid)}
+  /* 첫 화면에서 사업 3개를 노출 — 스크롤 없이 무엇을 하는 회사인지 전달 */
+  .jump{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:15px}
+  .jump a{padding:6px 2px;border-bottom:1px solid var(--hairline)}
+  .jump a:hover{border-bottom-color:var(--signal);color:var(--signal)}
 
-  /* Products */
-  .products{padding:0 12px;display:flex;flex-direction:column;gap:12px}
-  .tile{border-radius:24px;background:var(--surface);text-align:center}
-  .tile-eyebrow{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:10px}
-  .tile-title{letter-spacing:-0.03em;font-weight:700;line-height:1.08}
+  /* ── 사업 색인: 동일 구조의 행. 성숙도가 서열로 읽히지 않는다 ── */
+  .index{border-top:1px solid var(--hairline)}
+  .row{display:grid;grid-template-columns:132px minmax(0,1fr);gap:40px;padding:88px 0}
+  .row + .row{border-top:1px solid var(--hairline)}
+  /* 상태는 eyebrow 라벨이 아니라 열에 둔다 — 열이라는 구조가 메타정보임을 말한다 */
+  .status{font-size:14px;color:var(--ink-mid);line-height:1.45;padding-top:6px}
+  .row h2{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1.35}
+  .row .desc{margin-top:12px;max-width:var(--measure);color:var(--ink-mid)}
 
-  .tile-feature{padding:80px 24px 0;overflow:hidden}
-  .tile-feature .tile-eyebrow{font-size:15px;color:var(--accent);margin-bottom:12px}
-  .tile-feature .tile-title{font-size:clamp(40px,5.6vw,72px);line-height:1.05;letter-spacing:-0.035em}
-  .tile-feature .tile-desc{
-    max-width:620px;
-    margin:18px auto 56px;
-    font-size:clamp(19px,2vw,26px);
-    line-height:1.3;
-    letter-spacing:-0.01em;
-    color:var(--body);
-  }
+  /* 실제 순서가 있는 내용에만 번호를 쓴다. 사업 3개에는 쓰지 않는다 */
+  .steps{list-style:none;counter-reset:s;margin-top:28px;max-width:var(--measure)}
+  .steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:12px;
+            padding:9px 0;font-size:16px;color:var(--ink)}
+  .steps li::before{content:counter(s) ".";color:var(--ink-mid);font-variant-numeric:tabular-nums}
+  .loop{margin-top:14px;font-size:14px;color:var(--ink-mid)}
 
-  .phone{
-    width:min(100%,340px);
-    height:400px;
-    margin:0 auto;
-    padding:12px 12px 0;
-    background:var(--ink);
-    border-radius:48px 48px 0 0;
-  }
-  .phone-screen{
-    height:388px;
-    padding:40px 24px 0;
-    background:var(--bg);
-    border-radius:38px 38px 0 0;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    text-align:left;
-  }
-  .progress{height:6px;border-radius:3px;background:var(--line-soft);overflow:hidden}
-  .progress span{display:block;width:62%;height:100%;background:var(--accent)}
-  .word-card{margin-top:12px;padding:32px 22px;border-radius:24px;background:var(--surface)}
-  .word{font-size:34px;font-weight:700;letter-spacing:-0.03em;line-height:1.2}
-  .meaning{margin-top:12px;font-size:16px;line-height:1.45;color:var(--body)}
-  .answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .answer{padding:16px 6px;border-radius:16px;background:var(--surface);text-align:center;font-size:15px;font-weight:600}
-  .answer.primary{background:var(--accent);color:#fff}
+  /* 제품의 한 순간 — 기기 프레임 없이 */
+  .card{margin-top:28px;max-width:420px;background:var(--paper);padding:30px 26px}
+  .card .w{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1.2}
+  .card .m{margin-top:10px;font-size:16px;color:var(--ink-mid)}
+  .card .pick{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;font-size:14px}
+  .card .pick span{padding:9px 14px;border:1px solid var(--hairline);color:var(--ink-mid);border-radius:3px}
+  .card .pick span.on{border-color:var(--signal);color:var(--signal)}
 
-  .tile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
-  .tile-half{
-    min-height:480px;
-    padding:64px 28px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
-  .tile-half .tile-title{font-size:clamp(32px,3.6vw,48px)}
-  .tile-half .tile-desc{max-width:420px;margin-top:14px;font-size:19px;line-height:1.35;color:var(--body)}
-  .tile-half svg{width:100%;max-width:420px;height:auto;margin-top:auto;padding-top:36px}
-  .tile-dark{background:#000;color:#f5f5f7}
-  .tile-dark .tile-eyebrow{color:#a1a1a6}
-  .tile-dark .tile-desc{color:#c7c7cc}
+  /* ── 회사 ── */
+  .about{padding:104px 0;border-top:1px solid var(--hairline)}
+  .about p{font-family:var(--serif);font-size:clamp(21px,2.3vw,27px);font-weight:400;
+           line-height:1.6;max-width:22em}
+  .facts{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px}
+  .facts dt{font-size:14px;color:var(--ink-mid)}
+  .facts dd{margin-top:4px;font-size:17px;font-weight:500}
 
-  /* About */
-  .about{max-width:928px;margin:0 auto;padding:136px 24px 120px}
-  .about h2{
-    font-size:clamp(30px,4vw,52px);
-    line-height:1.14;
-    letter-spacing:-0.03em;
-    font-weight:700;
-  }
-  .about h2 span{color:var(--subtle)}
-  .facts{
-    margin-top:72px;
-    padding-top:28px;
-    border-top:1px solid var(--line);
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:32px;
-  }
-  .facts dt{font-size:13px;color:var(--muted)}
-  .facts dd{margin-top:6px;font-size:19px;font-weight:600}
+  /* ── 문의 ── */
+  .contact{padding:96px 0;border-top:1px solid var(--hairline)}
+  .contact h2{font-family:var(--serif);font-size:clamp(23px,2.6vw,30px);font-weight:400;
+              line-height:1.5;max-width:20em}
+  .mail{display:inline-block;margin-top:26px;font-size:19px;font-weight:500;color:var(--signal);
+        padding:10px 16px;border:1px solid var(--signal);border-radius:3px}
+  .mail:hover{background:var(--signal);color:var(--page)}
+  .hours{margin-top:24px;font-size:15px;color:var(--ink-mid);line-height:1.6}
 
-  /* Contact */
-  .contact{padding:0 12px 12px}
-  .contact-block{padding:96px 24px;border-radius:24px;background:var(--surface);text-align:center}
-  .contact-block h2{
-    font-size:clamp(36px,5vw,64px);
-    line-height:1.05;
-    letter-spacing:-0.035em;
-    font-weight:700;
-  }
-  .contact-email{
-    display:inline-block;
-    margin-top:24px;
-    color:var(--accent);
-    font-size:clamp(20px,2.2vw,28px);
-    font-weight:500;
-  }
-  .contact-info{margin-top:28px;font-size:15px;line-height:1.6;color:var(--muted)}
+  footer{border-top:1px solid var(--hairline);padding:26px 0 56px;display:flex;
+         flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:var(--ink-mid)}
+  footer a{padding:4px 2px}
+  footer a:hover{color:var(--signal)}
+  .foot-links{display:flex;gap:22px}
 
-  /* Footer */
-  footer{
-    max-width:1040px;
-    margin:0 auto;
-    padding:24px;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    gap:12px;
-    font-size:13px;
-    color:var(--muted);
+  @media (max-width:760px){
+    .wrap{padding:0 22px}
+    .statement{padding:84px 0 72px}
+    .row{grid-template-columns:1fr;gap:16px;padding:64px 0}
+    .status{padding-top:0}
+    .about,.contact{padding:72px 0}
   }
-  .footer-links{display:flex;gap:20px;color:var(--body)}
-
-  @media (max-width:768px){
-    .hero{padding:72px 24px 64px}
-    .tile-feature{padding-top:56px}
-    .tile-half{min-height:0;padding:48px 24px}
-    .about{padding:88px 24px 80px}
-    .contact-block{padding:64px 24px}
+  @media (max-width:380px){
+    .wrap{padding:0 18px}
+    .statement{padding:64px 0 56px}
+    .row{padding:52px 0}
+    .card{padding:24px 20px}
+    .facts{grid-template-columns:1fr;gap:22px}
   }
+  /* 비트리거 모션이 없으므로 끌 애니메이션도 없다 */
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="nav">
-    <a href="#top" class="logo">AristarLab</a>
-    <nav class="nav-links">
-      <a href="#products">제품</a>
-      <a href="#about">회사 소개</a>
-      <a href="#contact">문의하기</a>
+<div class="wrap">
+  <div class="masthead">
+    <a class="name" href="#top">AristarLab</a>
+    <nav>
+      <a href="#about">회사</a>
+      <a href="#contact">문의</a>
     </nav>
   </div>
-</header>
 
-<main>
-  <section id="top" class="hero">
+  <section id="top" class="statement">
     <h1>시끄러운 일상을 위한<br>조용한 소프트웨어</h1>
-    <p class="hero-desc">서울에서 지능형 모바일 앱과 자동화 제품을 만듭니다.</p>
-    <div class="hero-actions">
-      <a href="#products" class="button primary">제품 보기</a>
-      <a href="#contact" class="button">문의하기</a>
+    <p class="lede">서울에서 모바일 앱과 자동화 제품을 만듭니다. 언어, 학습, 자동화가 만나는 지점에서 일합니다.</p>
+    <div class="jump">
+      <a href="#esay-memory-eng">esay memory eng</a>
+      <a href="#content-automation">콘텐츠 자동화</a>
+      <a href="#algo-trading">알고리즘 트레이딩</a>
     </div>
   </section>
+</div>
 
-  <section id="products" class="products">
-    <article class="tile tile-feature">
-      <p class="tile-eyebrow">출시 준비 중</p>
-      <h2 class="tile-title">esay memory eng</h2>
-      <p class="tile-desc">내 기억 곡선에 맞춰 주는 영어 단어 앱</p>
-      <div class="phone" role="img" aria-label="휴대폰 화면에 표시된 영어 단어 복습 카드 예시">
-        <div class="phone-screen" aria-hidden="true">
-          <div class="progress"><span></span></div>
-          <div class="word-card">
-            <p class="word">ephemeral</p>
-            <p class="meaning">아주 잠깐 머무는, 덧없는</p>
-          </div>
-          <div class="answers">
-            <div class="answer">다시 볼게요</div>
-            <div class="answer primary">기억났어요</div>
-          </div>
+<main class="wrap">
+  <div class="index">
+
+    <article class="row" id="esay-memory-eng">
+      <p class="status">출시 준비 중</p>
+      <div>
+        <h2>esay memory eng</h2>
+        <p class="desc">내 기억 곡선에 맞춰 주는 영어 단어 앱. 잊어버릴 때쯤 다시 보여줍니다.</p>
+        <div class="card" aria-hidden="true">
+          <p class="w">ephemeral</p>
+          <p class="m">아주 잠깐 머무는, 덧없는</p>
+          <p class="pick"><span>다시 볼게요</span><span class="on">기억났어요</span></p>
         </div>
       </div>
     </article>
 
-    <div class="tile-grid">
-      <article class="tile tile-half tile-dark">
-        <p class="tile-eyebrow">사내 운영</p>
-        <h2 class="tile-title">콘텐츠 자동화</h2>
-        <p class="tile-desc">영상 콘텐츠를 대규모로 제작하는 멀티 에이전트 파이프라인</p>
-        <svg viewBox="0 0 420 140" aria-hidden="true">
-          <line x1="80" y1="70" x2="130" y2="70" stroke="#636366" stroke-width="2"/>
-          <line x1="190" y1="70" x2="240" y2="70" stroke="#636366" stroke-width="2"/>
-          <line x1="300" y1="70" x2="345" y2="70" stroke="#636366" stroke-width="2"/>
-          <circle cx="50" cy="70" r="30" fill="#2c2c2e"/>
-          <circle cx="160" cy="70" r="30" fill="#48484a"/>
-          <circle cx="270" cy="70" r="30" fill="#8e8e93"/>
-          <circle cx="375" cy="70" r="30" fill="#f5f5f7"/>
-          <path d="M366 56 L388 70 L366 84 Z" fill="#000"/>
-        </svg>
-      </article>
-      <article class="tile tile-half">
-        <p class="tile-eyebrow">연구 개발</p>
-        <h2 class="tile-title">알고리즘 트레이딩</h2>
-        <p class="tile-desc">MetaTrader 5 기반의 리서치 중심 시스템 전략</p>
-        <svg viewBox="0 0 420 140" aria-hidden="true">
-          <path d="M6 70 C 56 10, 86 10, 136 70 S 216 130, 266 70 S 366 10, 414 70" fill="none" stroke="#1d1d1f" stroke-width="3"/>
-          <path d="M6 70 C 56 40, 86 40, 136 70 S 216 100, 266 70 S 366 40, 414 70" fill="none" stroke="#aeaeb2" stroke-width="3"/>
-        </svg>
-      </article>
-    </div>
-  </section>
+    <article class="row" id="content-automation">
+      <p class="status">사내 운영</p>
+      <div>
+        <h2>콘텐츠 자동화</h2>
+        <p class="desc">영상 콘텐츠를 대규모로 제작하는 멀티 에이전트 파이프라인. 사내에서 운영하고 있습니다.</p>
+        <ol class="steps">
+          <li>소재 입력</li>
+          <li>에이전트 처리</li>
+          <li>합성</li>
+          <li>출력</li>
+        </ol>
+      </div>
+    </article>
 
-  <section id="about" class="about">
-    <h2>사용자의 주의와 시간을 존중하는 소프트웨어. <span>언어, 학습, 자동화가 만나는 지점에서 일합니다.</span></h2>
+    <article class="row" id="algo-trading">
+      <p class="status">연구 개발</p>
+      <div>
+        <h2>알고리즘 트레이딩</h2>
+        <p class="desc">MetaTrader 5 기반의 리서치 중심 시스템 전략. 아직 연구 단계입니다.</p>
+        <ol class="steps">
+          <li>전략 설계</li>
+          <li>백테스트</li>
+          <li>검증</li>
+        </ol>
+        <p class="loop">검증 결과를 설계로 되돌려 반복합니다.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="about" id="about">
+    <p>사용자의 주의와 시간을 존중하는 소프트웨어를 만듭니다.</p>
     <dl class="facts">
       <div><dt>설립</dt><dd>2026년 4월</dd></div>
       <div><dt>위치</dt><dd>서울 강남구</dd></div>
@@ -287,22 +216,20 @@
     </dl>
   </section>
 
-  <section id="contact" class="contact">
-    <div class="contact-block">
-      <h2>보내주신 메시지는 모두 읽고 있습니다</h2>
-      <a href="mailto:support@aristar.io" class="contact-email">support@aristar.io</a>
-      <p class="contact-info">서울특별시 강남구 압구정로 306<br>평일 10:00 – 19:00</p>
-    </div>
+  <section class="contact" id="contact">
+    <h2>보내주신 메시지는 모두 읽고 있습니다.</h2>
+    <a class="mail" href="mailto:support@aristar.io">support@aristar.io</a>
+    <p class="hours">서울특별시 강남구 압구정로 306<br>평일 10:00 – 19:00</p>
   </section>
-</main>
 
-<footer>
-  <span>© 2026 AristarLab. All rights reserved.</span>
-  <span class="footer-links">
-    <a href="/privacy.html">개인정보 처리방침</a>
-    <a href="/terms.html">이용약관</a>
-  </span>
-</footer>
+  <footer>
+    <span>© 2026 AristarLab</span>
+    <span class="foot-links">
+      <a href="/privacy.html">개인정보 처리방침</a>
+      <a href="/terms.html">이용약관</a>
+    </span>
+  </footer>
+</main>
 
 </body>
 </html>

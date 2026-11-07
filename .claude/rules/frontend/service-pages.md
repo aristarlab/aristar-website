@@ -31,8 +31,10 @@ URL은 `/<슬러그>` 단일 세그먼트다. 슬러그는 `CLAUDE.md`의 사업
 CTA의 메일 링크는 제목에 사업 식별자를 넣어 VOC 분류가 자동으로 되게 한다.
 
 ```
-mailto:support@aristar.io?subject=[esay-memory-eng] 문의
+mailto:support@aristar.io?subject=%5Besay-memory-eng%5D%20문의
 ```
+
+`%5B`=`[`, `%5D`=`]`, `%20`=공백. **URL 인코딩을 생략하지 않는다** — `[`·`]`는 RFC 3986 예약문자이고 공백을 날것으로 두면 일부 메일 클라이언트에서 제목이 잘린다. `taxonomy.yml`의 `subject_tag` 정규식은 디코딩된 제목에 적용되므로 규칙 쪽은 바꿀 필요가 없다.
 
 슬러그 표기를 바꾸면 메일 분류 규칙(`ops/voc/taxonomy.yml`)도 같이 바꿔야 한다. 한쪽만 바꾸지 않는다.
 
