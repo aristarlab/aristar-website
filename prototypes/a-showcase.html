@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AristarLab 쇼케이스 안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --ink:#1d1d1f; --body:#424245; --muted:#6e6e73; --subtle:#86868b;
+    --accent:#0066cc; --surface:#f5f5f7; --line:#d2d2d7; --line-soft:#e5e5ea;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Noto Sans KR',-apple-system,system-ui,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.5;
+    word-break:keep-all; overflow-wrap:break-word; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+  .proto-tag{background:var(--ink);color:#fff;font-size:12px;padding:6px 16px;text-align:center}
+
+  header{border-bottom:1px solid var(--line-soft)}
+  .nav{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;
+       justify-content:space-between;align-items:center;gap:12px;font-size:13px}
+  .logo{font-weight:600;font-size:15px}
+  .nav-links{display:flex;flex-wrap:wrap;gap:28px}
+
+  .hero{padding:112px 24px 96px;text-align:center}
+  .hero h1{
+    max-width:980px;margin:0 auto;font-size:clamp(36px,7vw,92px);line-height:1.18;
+    /* 승인 명세: em 고정값 → px 기준 clamp 보간 */
+    letter-spacing:clamp(-1.75px,calc(-0.272px - 0.1125vw),-0.85px);
+    font-weight:700;
+  }
+  .hero-desc{max-width:760px;margin:28px auto 0;font-size:clamp(19px,2vw,25px);
+             line-height:1.35;color:var(--muted)}
+  .hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+  .button{border:1px solid var(--accent);padding:12px 24px;border-radius:999px;
+          font-size:16px;font-weight:500;color:var(--accent)}
+  .button:hover{text-decoration:none;opacity:.85}
+  .button.primary{background:var(--accent);color:#fff}
+
+  .products{padding:0 12px;display:flex;flex-direction:column;gap:12px}
+  /* 승인 명세: 다크 타일 폐기 — 전부 --surface 통일 */
+  .tile{border-radius:24px;background:var(--surface);text-align:center}
+  /* 승인 명세: 배지는 3개 사업 동일 중립 스타일, 신규 색 토큰 0개 */
+  .badge{display:inline-block;border:1px solid var(--line);color:var(--muted);
+         background:transparent;border-radius:999px;padding:6px 14px;
+         font-size:13px;font-weight:600;margin-bottom:14px}
+  .tile-title{letter-spacing:-0.03em;font-weight:700;line-height:1.08}
+
+  .tile-feature{padding:80px 24px 0;overflow:hidden}
+  .tile-feature .tile-title{font-size:clamp(40px,5.6vw,72px);line-height:1.05;
+    letter-spacing:clamp(-1.43px,calc(-0.6px - 0.063vw),-0.91px)}
+  .tile-feature .tile-desc{max-width:595px;margin:18px auto 0;font-size:clamp(19px,2vw,26px);
+                           line-height:1.3;color:var(--body)}
+  /* 승인 명세: 링크는 desc 다음, 시각 자료 앞 — 세 타일 공통 */
+  .tile-link{display:inline-block;margin:22px 0 48px;color:var(--accent);
+             font-size:17px;font-weight:500;padding:8px 4px}
+
+  .phone{width:min(100%,340px);height:400px;margin:0 auto;padding:12px 12px 0;
+         background:var(--ink);border-radius:48px 48px 0 0}
+  .phone-screen{height:388px;padding:40px 24px 0;background:var(--bg);
+                border-radius:38px 38px 0 0;display:flex;flex-direction:column;gap:16px;text-align:left}
+  .progress{height:6px;border-radius:3px;background:var(--line-soft);overflow:hidden}
+  .progress span{display:block;width:62%;height:100%;background:var(--accent)}
+  .word-card{margin-top:12px;padding:32px 22px;border-radius:24px;background:var(--surface)}
+  .word{font-size:34px;font-weight:700;letter-spacing:-0.03em;line-height:1.2}
+  .meaning{margin-top:12px;font-size:16px;line-height:1.45;color:var(--body)}
+  .answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .answer{padding:16px 6px;border-radius:16px;background:var(--surface);
+          text-align:center;font-size:15px;font-weight:600}
+  .answer.primary{background:var(--accent);color:#fff}
+
+  /* 승인 명세: 그리드 3단 명시 */
+  .tile-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media (min-width:768px){.tile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .tile-half{min-height:480px;padding:64px 28px;display:flex;flex-direction:column;align-items:center}
+  .tile-half .tile-title{font-size:clamp(32px,3.6vw,48px);
+    letter-spacing:clamp(-1.04px,calc(-0.73px - 0.032vw),-0.79px)}
+  .tile-half .tile-desc{max-width:420px;margin-top:14px;font-size:19px;line-height:1.35;color:var(--body)}
+
+  /* 승인 명세: SVG는 장식, 단계는 실제 <ol> — 접근성 트리 평탄화 회피 */
+  .steps{list-style:none;counter-reset:s;margin-top:auto;text-align:left;max-width:420px;width:100%}
+  .steps li{counter-increment:s;position:relative;padding:12px 0 12px 38px;
+            font-size:16px;color:var(--body);border-bottom:1px solid var(--line-soft)}
+  .steps li:last-child{border-bottom:0}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:10px;
+    width:24px;height:24px;border-radius:999px;border:1px solid var(--line);
+    color:var(--muted);font-size:13px;font-weight:600;display:grid;place-items:center}
+  .cycle-note{margin-top:14px;font-size:14px;color:var(--muted);text-align:left;max-width:420px;width:100%}
+
+  .about{max-width:928px;margin:0 auto;padding:136px 24px 120px}
+  .about h2{font-size:clamp(30px,4vw,52px);line-height:1.14;letter-spacing:-0.025em;font-weight:700}
+  .about h2 span{color:var(--subtle)}
+  .facts{margin-top:72px;padding-top:28px;border-top:1px solid var(--line);
+         display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:32px}
+  .facts dt{font-size:13px;color:var(--muted)}
+  .facts dd{margin-top:6px;font-size:19px;font-weight:600}
+
+  .contact{padding:0 12px 12px}
+  .contact-block{padding:96px 24px;border-radius:24px;background:var(--surface);text-align:center}
+  .contact-block h2{font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-0.03em;font-weight:700}
+  .contact-email{display:inline-block;margin-top:24px;color:var(--accent);
+                 font-size:clamp(20px,2.2vw,28px);font-weight:500}
+  .contact-info{margin-top:28px;font-size:15px;line-height:1.6;color:var(--muted)}
+
+  footer{max-width:1040px;margin:0 auto;padding:24px;display:flex;flex-wrap:wrap;
+         justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+  .footer-links{display:flex;gap:20px;color:var(--body)}
+
+  @media (max-width:768px){
+    .hero{padding:72px 24px 64px}
+    .tile-feature{padding-top:56px}
+    .tile-half{min-height:0;padding:48px 24px}
+    .about{padding:88px 24px 80px}
+    .contact-block{padding:64px 24px}
+  }
+  /* 승인 명세: 360px 구간 대응 (380px 기준) */
+  @media (max-width:380px){
+    .hero{padding:56px 20px 48px}
+    .tile-feature,.tile-half{padding-left:20px;padding-right:20px}
+    .phone{height:360px;padding:10px 10px 0;border-radius:40px 40px 0 0}
+    .phone-screen{height:350px;padding:32px 18px 0;border-radius:32px 32px 0 0}
+    .word{font-size:28px}
+    .answers{gap:8px}
+    .answer{padding:14px 4px;font-size:14px}
+    .facts{grid-template-columns:1fr;gap:24px}
+    .contact-block{padding:48px 20px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<p class="proto-tag">프로토타입 A — 쇼케이스 방향 (승인 명세 적용: 다크 타일 폐기 · 중립 배지 · 자간 clamp · 360px · ol 단계)</p>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="logo">AristarLab</a>
+    <nav class="nav-links">
+      <a href="#products">제품</a><a href="#about">회사 소개</a><a href="#contact">문의하기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="top" class="hero">
+    <h1>시끄러운 일상을 위한<br>조용한 소프트웨어</h1>
+    <p class="hero-desc">서울에서 지능형 모바일 앱과 자동화 제품을 만듭니다.</p>
+    <div class="hero-actions">
+      <a href="#products" class="button primary">제품 보기</a>
+      <a href="#contact" class="button">문의하기</a>
+    </div>
+  </section>
+
+  <section id="products" class="products">
+    <article class="tile tile-feature">
+      <p class="badge">출시 준비 중</p>
+      <h2 class="tile-title">esay memory eng</h2>
+      <p class="tile-desc">내 기억 곡선에 맞춰 주는 영어 단어 앱</p>
+      <a class="tile-link" href="/esay-memory-eng">자세히 보기</a>
+      <div class="phone" role="img" aria-label="휴대폰 화면에 표시된 영어 단어 복습 카드 예시">
+        <div class="phone-screen" aria-hidden="true">
+          <div class="progress"><span></span></div>
+          <div class="word-card">
+            <p class="word">ephemeral</p>
+            <p class="meaning">아주 잠깐 머무는, 덧없는</p>
+          </div>
+          <div class="answers">
+            <div class="answer">다시 볼게요</div>
+            <div class="answer primary">기억났어요</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="tile-grid">
+      <article class="tile tile-half">
+        <p class="badge">사내 운영</p>
+        <h2 class="tile-title">콘텐츠 자동화</h2>
+        <p class="tile-desc">영상 콘텐츠를 대규모로 제작하는 멀티 에이전트 파이프라인</p>
+        <a class="tile-link" href="/content-automation">자세히 보기</a>
+        <ol class="steps">
+          <li>소재 입력</li><li>에이전트 처리</li><li>합성</li><li>출력</li>
+        </ol>
+      </article>
+      <article class="tile tile-half">
+        <p class="badge">연구 개발</p>
+        <h2 class="tile-title">알고리즘 트레이딩</h2>
+        <p class="tile-desc">MetaTrader 5 기반의 리서치 중심 시스템 전략</p>
+        <a class="tile-link" href="/algo-trading">자세히 보기</a>
+        <ol class="steps">
+          <li>전략 설계</li><li>백테스트</li><li>검증</li>
+        </ol>
+        <p class="cycle-note">검증 결과를 설계로 되돌려 반복합니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>사용자의 주의와 시간을 존중하는 소프트웨어. <span>언어, 학습, 자동화가 만나는 지점에서 일합니다.</span></h2>
+    <dl class="facts">
+      <div><dt>설립</dt><dd>2026년 4월</dd></div>
+      <div><dt>위치</dt><dd>서울 강남구</dd></div>
+      <div><dt>분야</dt><dd>모바일 · 자동화</dd></div>
+      <div><dt>사업자등록번호</dt><dd>389-88-03801</dd></div>
+    </dl>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="contact-block">
+      <h2>보내주신 메시지는 모두 읽고 있습니다</h2>
+      <a href="mailto:support@aristar.io" class="contact-email">support@aristar.io</a>
+      <p class="contact-info">서울특별시 강남구 압구정로 306<br>평일 10:00 – 19:00</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 AristarLab. All rights reserved.</span>
+  <span class="footer-links">
+    <a href="/privacy.html">개인정보 처리방침</a><a href="/terms.html">이용약관</a>
+  </span>
+</footer>
+
+</body>
+</html>

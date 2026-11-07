@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AristarLab 색인 안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1C24;        /* 17.33:1 on white */
+    --ink-mid:#45575F;    /*  7.55:1 on white */
+    --hairline:#94A3AB;   /*  2.60:1 — 선 전용, 텍스트 금지 */
+    --paper:#F4F6F6;
+    --page:#FFFFFF;
+    --signal:#2E6354;     /*  6.93:1 on white */
+    --measure:540px;
+    --serif:'Gowun Batang',serif;
+    --sans:'IBM Plex Sans KR',-apple-system,system-ui,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--sans);
+    font-size:17px;            /* 명시 선언 — 기본값 의존 제거 */
+    font-weight:400;
+    line-height:1.6;           /* 설계 선택. 한글 전용 근거 수치는 없음 */
+    background:var(--page);
+    color:var(--ink);
+    word-break:keep-all;
+    overflow-wrap:break-word;
+    overflow-x:hidden;
+    letter-spacing:0;
+  }
+  a{color:inherit;text-decoration:none}
+  /* 라운드는 상호작용 표면에만 — "누를 수 있음"을 뜻한다 */
+  a:focus-visible{outline:2px solid var(--signal);outline-offset:4px;border-radius:3px}
+
+  .proto-tag{background:var(--ink);color:var(--paper);font-size:12px;padding:6px 16px;
+             font-weight:400;letter-spacing:0}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 32px}
+
+  /* ── 마스트헤드: 작게 ── */
+  .masthead{padding:28px 0 0;display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+  .masthead .name{font-family:var(--serif);font-size:19px;font-weight:700}
+  .masthead nav{display:flex;gap:24px;font-size:14px;color:var(--ink-mid)}
+  .masthead nav a:hover{color:var(--signal)}
+
+  /* ── 성명문: 여백이 무게를 든다 ── */
+  .statement{padding:140px 0 120px}
+  .statement h1{
+    font-family:var(--serif);
+    font-size:clamp(30px,4.2vw,44px);
+    font-weight:400;
+    line-height:1.45;
+    letter-spacing:-0.01em;
+    max-width:16em;
+  }
+  .statement p{margin-top:28px;max-width:var(--measure);color:var(--ink-mid)}
+
+  /* 첫 화면에서 사업 3개를 바로 노출 — 스크롤 없이 무엇을 하는 회사인지 전달 */
+  .jump{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:15px}
+  .jump a{padding:6px 2px;border-bottom:1px solid var(--hairline)}
+  .jump a:hover{border-bottom-color:var(--signal);color:var(--signal)}
+
+  /* ── 사업 색인: 동일 구조의 행. 성숙도가 서열로 읽히지 않는다 ── */
+  .index{border-top:1px solid var(--hairline)}
+  .row{
+    display:grid;
+    grid-template-columns:132px minmax(0,1fr);
+    gap:40px;
+    padding:88px 0;
+  }
+  .row + .row{border-top:1px solid var(--hairline)}
+  .status{font-size:14px;color:var(--ink-mid);line-height:1.45;padding-top:6px}
+  .row h2{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1.35;letter-spacing:0}
+  .row .lede{margin-top:12px;max-width:var(--measure);color:var(--ink-mid)}
+  .more{display:inline-block;margin-top:24px;font-size:15px;font-weight:500;
+        color:var(--signal);padding:6px 2px;border-bottom:1px solid var(--signal)}
+  .more:hover{background:var(--paper);border-radius:3px}
+
+  /* 실제 순서가 있는 내용에만 번호를 쓴다 */
+  .steps{list-style:none;counter-reset:s;margin-top:32px;max-width:var(--measure)}
+  .steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;
+            gap:12px;padding:9px 0;font-size:16px;color:var(--ink)}
+  .steps li::before{content:counter(s) ".";color:var(--ink-mid);font-variant-numeric:tabular-nums}
+  .loop{margin-top:14px;font-size:14px;color:var(--ink-mid)}
+
+  /* esay memory eng — 기기 프레임 없이 제품의 한 순간만 */
+  .card{margin-top:32px;max-width:420px;background:var(--paper);padding:30px 26px}
+  .card .w{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1.2}
+  .card .m{margin-top:10px;font-size:16px;color:var(--ink-mid)}
+  .card .pick{margin-top:24px;display:flex;gap:10px;font-size:14px}
+  .card .pick span{padding:9px 14px;border:1px solid var(--hairline);color:var(--ink-mid);border-radius:3px}
+  .card .pick span.on{border-color:var(--signal);color:var(--signal)}
+
+  /* ── 회사 ── */
+  .about{padding:104px 0;border-top:1px solid var(--hairline)}
+  .about p{font-family:var(--serif);font-size:clamp(21px,2.3vw,27px);font-weight:400;
+           line-height:1.6;max-width:22em}
+  .facts{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px}
+  .facts dt{font-size:14px;color:var(--ink-mid)}
+  .facts dd{margin-top:4px;font-size:17px;font-weight:500}
+
+  /* ── 문의 ── */
+  .contact{padding:96px 0;border-top:1px solid var(--hairline)}
+  .contact h2{font-family:var(--serif);font-size:clamp(23px,2.6vw,30px);font-weight:400;line-height:1.5;max-width:20em}
+  .mail{display:inline-block;margin-top:26px;font-size:19px;font-weight:500;color:var(--signal);
+        padding:10px 16px;border:1px solid var(--signal);border-radius:3px}
+  .mail:hover{background:var(--signal);color:var(--page)}
+  .hours{margin-top:24px;font-size:15px;color:var(--ink-mid);line-height:1.6}
+
+  footer{border-top:1px solid var(--hairline);padding:26px 0 56px;display:flex;
+         flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:var(--ink-mid)}
+  footer a{padding:4px 2px}
+  footer a:hover{color:var(--signal)}
+  .foot-links{display:flex;gap:22px}
+
+  @media (max-width:760px){
+    .wrap{padding:0 22px}
+    .statement{padding:84px 0 72px}
+    .row{grid-template-columns:1fr;gap:16px;padding:64px 0}
+    .status{padding-top:0}
+    .about,.contact{padding:72px 0}
+  }
+  @media (max-width:380px){
+    .wrap{padding:0 18px}
+    .statement{padding:64px 0 56px}
+    .row{padding:52px 0}
+    .card{padding:24px 20px}
+    .card .pick{flex-wrap:wrap}
+    .facts{grid-template-columns:1fr;gap:22px}
+  }
+  /* 비트리거 모션이 없으므로 끌 애니메이션도 없다 */
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<p class="proto-tag">프로토타입 B — 색인 방향 (새 제안: 잉크 스케일 · 고운바탕+IBM Plex Sans KR · 매단 색인 · 모션 0)</p>
+
+<div class="wrap">
+  <div class="masthead">
+    <a class="name" href="#top">AristarLab</a>
+    <nav><a href="#about">회사</a><a href="#contact">문의</a></nav>
+  </div>
+
+  <section id="top" class="statement">
+    <h1>시끄러운 일상을 위한<br>조용한 소프트웨어</h1>
+    <p>서울에서 모바일 앱과 자동화 제품을 만듭니다. 언어, 학습, 자동화가 만나는 지점에서 일합니다.</p>
+    <div class="jump">
+      <a href="#esay-memory-eng">esay memory eng</a>
+      <a href="#content-automation">콘텐츠 자동화</a>
+      <a href="#algo-trading">알고리즘 트레이딩</a>
+    </div>
+  </section>
+</div>
+
+<main class="wrap">
+  <div class="index">
+
+    <article class="row" id="esay-memory-eng">
+      <p class="status">출시 준비 중</p>
+      <div>
+        <h2>esay memory eng</h2>
+        <p class="lede">내 기억 곡선에 맞춰 주는 영어 단어 앱. 잊어버릴 때쯤 다시 보여줍니다.</p>
+        <a class="more" href="/esay-memory-eng">자세히 보기</a>
+        <div class="card" aria-hidden="true">
+          <p class="w">ephemeral</p>
+          <p class="m">아주 잠깐 머무는, 덧없는</p>
+          <p class="pick"><span>다시 볼게요</span><span class="on">기억났어요</span></p>
+        </div>
+      </div>
+    </article>
+
+    <article class="row" id="content-automation">
+      <p class="status">사내 운영</p>
+      <div>
+        <h2>콘텐츠 자동화</h2>
+        <p class="lede">영상 콘텐츠를 대규모로 제작하는 멀티 에이전트 파이프라인. 사내에서 운영하고 있습니다.</p>
+        <a class="more" href="/content-automation">자세히 보기</a>
+        <ol class="steps">
+          <li>소재 입력</li><li>에이전트 처리</li><li>합성</li><li>출력</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="row" id="algo-trading">
+      <p class="status">연구 개발</p>
+      <div>
+        <h2>알고리즘 트레이딩</h2>
+        <p class="lede">MetaTrader 5 기반의 리서치 중심 시스템 전략. 아직 연구 단계입니다.</p>
+        <a class="more" href="/algo-trading">자세히 보기</a>
+        <ol class="steps">
+          <li>전략 설계</li><li>백테스트</li><li>검증</li>
+        </ol>
+        <p class="loop">검증 결과를 설계로 되돌려 반복합니다.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="about" id="about">
+    <p>사용자의 주의와 시간을 존중하는 소프트웨어를 만듭니다.</p>
+    <dl class="facts">
+      <div><dt>설립</dt><dd>2026년 4월</dd></div>
+      <div><dt>위치</dt><dd>서울 강남구</dd></div>
+      <div><dt>분야</dt><dd>모바일 · 자동화</dd></div>
+      <div><dt>사업자등록번호</dt><dd>389-88-03801</dd></div>
+    </dl>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>보내주신 메시지는 모두 읽고 있습니다.</h2>
+    <a class="mail" href="mailto:support@aristar.io">support@aristar.io</a>
+    <p class="hours">서울특별시 강남구 압구정로 306<br>평일 10:00 – 19:00</p>
+  </section>
+
+  <footer>
+    <span>© 2026 AristarLab</span>
+    <span class="foot-links">
+      <a href="/privacy.html">개인정보 처리방침</a><a href="/terms.html">이용약관</a>
+    </span>
+  </footer>
+</main>
+
+</body>
+</html>
