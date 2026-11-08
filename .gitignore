@@ -26,6 +26,7 @@ out/
 build/
 dist/
 *.tsbuildinfo
+next-env.d.ts
 npm-debug.log*
 
 # AWS / IaC
