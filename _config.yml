@@ -1,0 +1,41 @@
+# GitHub Pages(Jekyll) 공개 범위 제어
+#
+# Pages는 레포 루트 전체를 서빙한다. 내부 문서·운영 규칙·프로토타입이
+# aristar.io에 그대로 노출되던 문제를 막는다.
+#
+# 공개되는 것은 아래 5개뿐이다:
+#   index.html  privacy.html  terms.html  app-ads.txt  CNAME
+#
+# 새 디렉터리를 추가할 때 공개 대상이 아니면 반드시 이 목록에 넣는다.
+# 확인 방법: 배포 후 `curl -o /dev/null -w "%{http_code}" https://aristar.io/<경로>`
+
+exclude:
+  # 내부 문서·규칙
+  - docs/
+  - ops/
+  - prototypes/
+  - .claude/
+  - CLAUDE.md
+  - CLAUDE.local.md
+  - README.md
+
+  # 저장소 설정
+  - .gitignore
+  - .mcp.json
+  - .worktreeinclude
+
+  # Next.js 전환 산출물 (develop 병합 대비 선제 제외)
+  - app/
+  - lib/
+  - components/
+  - public/
+  - node_modules/
+  - .next/
+  - out/
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - next.config.ts
+  - next-env.d.ts
+  - eslint.config.mjs
+  - amplify.yml
