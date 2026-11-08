@@ -1,0 +1,141 @@
+:root{
+  /* 잉크 단색 스케일 — 텍스트에 쓸 색이 하나뿐이라 액센트가 장식으로 번질 수 없다 */
+  --ink:#0F1C24;        /* 17.33:1 on white */
+  --ink-mid:#45575F;    /*  7.55:1 on white */
+  --hairline:#94A3AB;   /*  2.60:1 — 선 전용, 텍스트 금지 */
+  --paper:#F4F6F6;
+  --page:#FFFFFF;
+  --signal:#2E6354;     /*  6.93:1 on white — 링크·포커스·상태 */
+  --measure:540px;      /* 전단짜기 활자틀 25~35배 환산 범위 내 */
+  --serif:'Gowun Batang','Apple SD Gothic Neo',serif;
+  --sans:'IBM Plex Sans KR',-apple-system,system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  font-size:17px;
+  font-weight:400;
+  line-height:1.6;
+  letter-spacing:0;
+  background:var(--page);
+  color:var(--ink);
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+/* 라운드는 상호작용 표면에만 쓴다 — "누를 수 있음"을 뜻하게 한다 */
+a:focus-visible{outline:2px solid var(--signal);outline-offset:4px;border-radius:3px}
+section[id]{scroll-margin-top:24px}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 32px}
+
+/* ── 마스트헤드 ── */
+.masthead{padding:28px 0 0;display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+.masthead .name{font-family:var(--serif);font-size:19px;font-weight:700}
+.masthead nav{display:flex;gap:24px;font-size:14px;color:var(--ink-mid)}
+.masthead nav a:hover{color:var(--signal)}
+
+/* ── 성명문: 여백이 무게를 든다 ── */
+.statement{padding:140px 0 120px}
+.statement h1{
+  font-family:var(--serif);
+  font-size:clamp(30px,4.2vw,44px);
+  font-weight:400;
+  line-height:1.45;
+  letter-spacing:-0.01em;
+  max-width:16em;
+}
+.statement .lede{margin-top:28px;max-width:var(--measure);color:var(--ink-mid)}
+/* 첫 화면에서 사업 3개를 노출 — 스크롤 없이 무엇을 하는 회사인지 전달 */
+.jump{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:15px}
+.jump a{padding:6px 2px;border-bottom:1px solid var(--hairline)}
+.jump a:hover{border-bottom-color:var(--signal);color:var(--signal)}
+
+/* ── 사업 색인: 동일 구조의 행. 성숙도가 서열로 읽히지 않는다 ── */
+.index{border-top:1px solid var(--hairline)}
+.row{display:grid;grid-template-columns:132px minmax(0,1fr);gap:40px;padding:88px 0}
+.row + .row{border-top:1px solid var(--hairline)}
+/* 상태는 eyebrow 라벨이 아니라 열에 둔다 — 열이라는 구조가 메타정보임을 말한다 */
+.status{font-size:14px;color:var(--ink-mid);line-height:1.45;padding-top:6px}
+.row h2{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1.35}
+.row .desc{margin-top:12px;max-width:var(--measure);color:var(--ink-mid)}
+.row .more{display:inline-block;margin-top:14px;font-size:15px;color:var(--signal);border-bottom:1px solid var(--signal)}
+.row .more:hover{color:var(--ink)}
+
+/* 실제 순서가 있는 내용에만 번호를 쓴다. 사업 3개에는 쓰지 않는다 */
+.steps{list-style:none;counter-reset:s;margin-top:28px;max-width:var(--measure)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:12px;
+          padding:9px 0;font-size:16px;color:var(--ink)}
+.steps li::before{content:counter(s) ".";color:var(--ink-mid);font-variant-numeric:tabular-nums}
+.loop{margin-top:14px;font-size:14px;color:var(--ink-mid)}
+
+/* 제품의 한 순간 — 기기 프레임 없이 */
+.card{margin-top:28px;max-width:420px;background:var(--paper);padding:30px 26px}
+.card .w{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1.2}
+.card .m{margin-top:10px;font-size:16px;color:var(--ink-mid)}
+.card .pick{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;font-size:14px}
+.card .pick span{padding:9px 14px;border:1px solid var(--hairline);color:var(--ink-mid);border-radius:3px}
+.card .pick span.on{border-color:var(--signal);color:var(--signal)}
+
+/* ── 회사 ── */
+.about{padding:104px 0;border-top:1px solid var(--hairline)}
+.about p{font-family:var(--serif);font-size:clamp(21px,2.3vw,27px);font-weight:400;
+         line-height:1.6;max-width:22em}
+.facts{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px}
+.facts dt{font-size:14px;color:var(--ink-mid)}
+.facts dd{margin-top:4px;font-size:17px;font-weight:500}
+
+/* ── 문의 ── */
+.contact{padding:96px 0;border-top:1px solid var(--hairline)}
+.contact h2{font-family:var(--serif);font-size:clamp(23px,2.6vw,30px);font-weight:400;
+            line-height:1.5;max-width:20em}
+.mail{display:inline-block;margin-top:26px;font-size:19px;font-weight:500;color:var(--signal);
+      padding:10px 16px;border:1px solid var(--signal);border-radius:3px}
+.mail:hover{background:var(--signal);color:var(--page)}
+.hours{margin-top:24px;font-size:15px;color:var(--ink-mid);line-height:1.6}
+
+footer{border-top:1px solid var(--hairline);padding:26px 0 56px;display:flex;
+       flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:var(--ink-mid)}
+footer a{padding:4px 2px}
+footer a:hover{color:var(--signal)}
+.foot-links{display:flex;gap:22px}
+
+/* ── 서비스 소개 페이지 공통 섹션 (메인 페이지 리듬 승계: hairline 구분 + 넉넉한 세로 여백) ── */
+.section-title{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1.35}
+
+.problem{padding:88px 0;border-top:1px solid var(--hairline)}
+.problem .section-title{margin-bottom:24px}
+.problem p{max-width:var(--measure);color:var(--ink-mid)}
+.problem p + p{margin-top:20px}
+
+.features{padding:88px 0;border-top:1px solid var(--hairline)}
+.features .section-title{margin-bottom:40px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px 40px}
+.feature-grid h3{font-size:17px;font-weight:600;color:var(--ink)}
+.feature-grid p{margin-top:10px;color:var(--ink-mid);font-size:15px;max-width:var(--measure)}
+
+.visual{padding:88px 0;border-top:1px solid var(--hairline)}
+.visual .section-title{margin-bottom:28px}
+
+@media (max-width:760px){
+  .wrap{padding:0 22px}
+  .statement{padding:84px 0 72px}
+  .row{grid-template-columns:1fr;gap:16px;padding:64px 0}
+  .status{padding-top:0}
+  .about,.contact,.problem,.features,.visual{padding:72px 0}
+}
+@media (max-width:380px){
+  .wrap{padding:0 18px}
+  .statement{padding:64px 0 56px}
+  .row{padding:52px 0}
+  .card{padding:24px 20px}
+  .facts{grid-template-columns:1fr;gap:22px}
+  .about,.contact,.problem,.features,.visual{padding:52px 0}
+}
+/* 비트리거 모션이 없으므로 끌 애니메이션도 없다 */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
